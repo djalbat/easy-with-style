@@ -2,57 +2,113 @@
 
 import withStyle from "../index";  ///
 
-import { React } from "reaction";
+import { window, Element } from "easy";
 
 import cursor from "./cursor";
 
-import { getPreviousSibling } from "../utilities/sibling";
+class VerticalSplitter extends Element {
+  mouseUpHandler() {
+    const dragging = this.isDragging();
 
-const { Component } = React;
+    if (dragging) {
+      this.stopDragging();
+    }
 
-class VerticalSplitter extends Component {
-  static mixins = [
-    mouseUpHandler,
-    mouseMoveHandler,
-    mouseDownHandler,
-    mouseOverHandler,
-    mouseOutHandler,
-    startDragging,
-    stopDragging,
-    isDragging
-  ];
-
-  componentDidMount() {
-    const previousSibling = getPreviousSibling(this),
-          sizeableDiv = previousSibling;  ///
-
-    this.sizeableDiv = sizeableDiv;
-
-    window.addEventListener("mouseup", this.mouseUpHandler);
-
-    window.addEventListener("mousemove", this.mouseMoveHandler);
+    cursor.reset();
   }
 
-  componentWillUnmount() {
-    window.removeEventListener("mousemove", this.mouseMoveHandler);
+  mouseMoveHandler(event) {
+    const dragging = this.isDragging();
 
-    window.removeEventListener("mouseup", this.mouseUpHandler);
+    if (dragging) {
+      const mouseLeft = event.pageX,  ///
+            relativeMouseLeft = mouseLeft - this.previousMouseLeft,
+            sizeableDivWidth = this.previousSizeableDivWidth + relativeMouseLeft,
+            previousSiblingElement = this.getPreviousSiblingElement(),
+            sizeableDiv = previousSiblingElement,  ///
+            width = sizeableDivWidth; ///
 
-    delete this.sizeableDiv;
+      sizeableDiv.setWidth(width);
+    }
   }
 
-  render(update) {
-    const { className } = this.props;
+  mouseDownHandler(event) {
+    const dragging = this.isDragging();
 
-    return (
+    if (!dragging) {
+      const mouseLeft = event.pageX,  ///
+            previousSiblingElement = this.getPreviousSiblingElement(),
+            sizeableDiv = previousSiblingElement,  ///
+            sizeableDivWidth = sizeableDiv.getWidth(),
+            previousMouseLeft = mouseLeft,  ///
+            previousSizeableDivWidth = sizeableDivWidth;   ///
 
-      <div className={`${className} vertical-splitter`}
-           onMouseDown={this.mouseDownHandler}
-           onMouseOver={this.mouseOverHandler}
-           onMouseOut={this.mouseOutHandler}
-      />
+      this.previousMouseLeft = previousMouseLeft;
 
-    );
+      this.previousSizeableDivWidth = previousSizeableDivWidth;
+
+      this.startDragging();
+    }
+
+    cursor.columnResize();
+  }
+
+  mouseOverHandler() {
+    cursor.columnResize();
+  }
+
+  mouseOutHandler() {
+    cursor.reset();
+  }
+
+  startDragging() {
+    this.addClass("dragging");
+  }
+
+  stopDragging() {
+    this.removeClass("dragging");
+  }
+
+  isDragging() {
+    const dragging = this.hasClass("dragging");
+
+    return dragging;
+  }
+
+  initialise() {
+    const mouseUpHandler = this.mouseUpHandler.bind(this),
+          mouseMoveHandler = this.mouseMoveHandler.bind(this),
+          mouseDownHandler = this.mouseDownHandler.bind(this),
+          mouseOverHandler = this.mouseOverHandler.bind(this),
+          mouseOutHandler = this.mouseOutHandler.bind(this);
+
+    this.onMouseDown(mouseDownHandler);
+    this.onMouseOver(mouseOverHandler);
+    this.onMouseOut(mouseOutHandler);
+
+    window.onMouseUp(mouseUpHandler);
+
+    window.onMouseMove(mouseMoveHandler);
+  }
+
+  static tagName = "div";
+
+  static defaultProperties = {
+    className: "vertical-splitter"
+  };
+
+  static fromProperties(Class, properties) {
+    if (properties === undefined) {
+      properties = Class; ///
+
+      Class = LexicalEntriesTextarea;
+    }
+
+    const verticalSplitter = Element.fromProperties(Class, properties);
+
+    verticalSplitter.initialise();
+
+    return verticalSplitter;
   }
 }
 
@@ -63,67 +119,3 @@ export default withStyle(VerticalSplitter)`
   background-color: lightgrey;
 
 `;
-
-function mouseUpHandler() {
-  const dragging = this.isDragging();
-
-  if (dragging) {
-    this.stopDragging();
-  }
-
-  cursor.reset();
-}
-
-function mouseMoveHandler(event) {
-  const dragging = this.isDragging();
-
-  if (dragging) {
-    const mouseLeft = event.pageX,  ///
-          relativeMouseLeft = mouseLeft - this.previousMouseLeft,
-          sizeableDivWidth = this.previousSizeableDivWidth + relativeMouseLeft,
-          width = sizeableDivWidth; ///
-
-    this.sizeableDiv.setWidth(width);
-  }
-}
-
-function mouseDownHandler(event) {
-  const dragging = this.isDragging();
-
-  if (!dragging) {
-    const mouseLeft = event.pageX,  ///
-          sizeableDivWidth = this.sizeableDiv.getWidth(),
-          previousMouseLeft = mouseLeft,  ///
-          previousSizeableDivWidth = sizeableDivWidth;   ///
-
-    this.previousMouseLeft = previousMouseLeft;
-
-    this.previousSizeableDivWidth = previousSizeableDivWidth;
-
-    this.startDragging();
-  }
-
-  cursor.columnResize();
-}
-
-function mouseOverHandler() {
-  cursor.columnResize();
-}
-
-function mouseOutHandler() {
-  cursor.reset();
-}
-
-function startDragging() {
-  this.addClass("dragging");
-}
-
-function stopDragging() {
-  this.removeClass("dragging");
-}
-
-function isDragging() {
-  const dragging = this.hasClass("dragging");
-
-  return dragging;
-}

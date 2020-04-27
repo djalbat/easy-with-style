@@ -10,10 +10,10 @@ import ColumnsDiv from "./div/columns";
 import SubHeading from "./subHeading";
 import SizeableDiv from "./div/sizeable";
 import BNFTextarea from "./textarea/bnf";
-// import ContentTextarea from "./textarea/content";
-// import VerticalSplitter from "./verticalSplitter";
+import ContentTextarea from "./textarea/content";
+import VerticalSplitter from "./verticalSplitter";
 import ParseTreeTextarea from "./textarea/parseTree";
-// import LexicalEntriesTextarea from "./textarea/lexicalEntries";
+import LexicalEntriesTextarea from "./textarea/lexicalEntries";
 
 export default class View extends Element {
   getParseTree() {
@@ -39,17 +39,17 @@ export default class View extends Element {
     try {
       const parseTree = this.getParseTree();
 
-      this.hideError();
-
       this.setParseTree(parseTree);
     } catch (error) {
-      this.showError();
+      console.log(error);
 
       this.clearParseTree();
     }
   }
 
   childElements(properties) {
+    const keyUpHandler = this.keyUpHandler.bind(this);
+
     return ([
 
       <Heading>
@@ -58,15 +58,24 @@ export default class View extends Element {
       <ColumnsDiv>
         <SizeableDiv>
           <SubHeading>
+            Lexical entries
+          </SubHeading>
+          <LexicalEntriesTextarea onKeyUp={keyUpHandler} />
+          <SubHeading>
             BNF
           </SubHeading>
-          <BNFTextarea onKeyUp={this.keyUpHandler} />
+          <BNFTextarea onKeyUp={keyUpHandler} />
         </SizeableDiv>
+        <VerticalSplitter />
         <ColumnDiv>
           <SubHeading>
             Parse tree
           </SubHeading>
           <ParseTreeTextarea />
+          <SubHeading>
+            Content
+          </SubHeading>
+          <ContentTextarea onKeyUp={keyUpHandler} />
         </ColumnDiv>
       </ColumnsDiv>
 
@@ -81,11 +90,11 @@ export default class View extends Element {
           content = "", ///
           lexicalEntries = entries; ///
 
-    // this.setBNF(bnf);
-    // this.setContent(content);
-    // this.setLexicalEntries(lexicalEntries);
+    this.setBNF(bnf);
+    this.setContent(content);
+    this.setLexicalEntries(lexicalEntries);
 
-    // this.keyUpHandler();
+    this.keyUpHandler();
   }
 
   static tagName = "div";
@@ -98,23 +107,3 @@ export default class View extends Element {
     return view;
   }
 }
-
-/*
-<SizeableDiv>
-  <SubHeading>
-    Lexical entries
-  </SubHeading>
-  <LexicalEntriesTextarea onKeyUp={this.keyUpHandler} />
-</SizeableDiv>
-<VerticalSplitter />
-<ColumnDiv>
-  <SubHeading>
-    Parse tree
-  </SubHeading>
-  <ParseTreeTextarea />
-  <SubHeading>
-    Content
-  </SubHeading>
-  <ContentTextarea onKeyUp={this.keyUpHandler} />
-</ColumnDiv>
-*/

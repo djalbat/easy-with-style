@@ -27,7 +27,8 @@ class BNFTextarea extends Textarea {
   }
 
   static defaultProperties = {
-    className: "bnf"
+    className: "bnf",
+    spellCheck: "false"
   };
 
   static fromProperties(Class, properties) {

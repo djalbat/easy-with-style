@@ -3,42 +3,43 @@
 import Textarea from "../textarea";
 
 class ContentTextarea extends Textarea {
-  static mixins = [
-    getContent,
-    setContent
-  ];
+  getContent() {
+    const value = this.getValue(),
+        content = value;  ///
 
-  render(update) {
-    const { className } = Textarea,
-          { children } = this.props;
+    return content;
+  }
 
-    return (
+  setContent(content) {
+    const value = content;  ///
 
-      <textarea className={`${className} content`}
-                ref={(domElement) => {
+    this.setValue(value);
+  }
 
-                  this.domElement = domElement;
+  parentContext() {
+    const getContent = this.getContent.bind(this),
+          setContent = this.setContent.bind(this);
 
-                }}
-      >
-        {children}
-      </textarea>
+    return ({
+      getContent,
+      setContent
+    });
+  }
 
-    );
+  static defaultProperties = {
+    className: "content",
+    spellCheck: "false"
+  };
+
+  static fromProperties(Class, properties) {
+    if (properties === undefined) {
+      properties = Class; ///
+
+      Class = ContentTextarea;
+    }
+
+    return Textarea.fromProperties(Class, properties);
   }
 }
 
 export default ContentTextarea;
-
-function getContent() {
-  const value = this.getValue(),
-        content = value;  ///
-
-  return content;
-}
-
-function setContent(content) {
-  const value = content;  ///
-
-  this.setValue(value);
-}

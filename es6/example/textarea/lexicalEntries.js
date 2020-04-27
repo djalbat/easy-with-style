@@ -5,27 +5,42 @@ import withStyle from "../../index";  ///
 import Textarea from "../textarea";
 
 class LexicalEntriesTextarea extends Textarea {
-  static mixins = [
-    getLexicalEntries,
-    setLexicalEntries
-  ];
+  getLexicalEntries() {
+    const value = this.getValue(),
+          lexicalEntries = JSON.parse(value);
 
-  render(update) {
-    const { className, children } = this.props;
+    return lexicalEntries;
+  }
 
-    return (
+  setLexicalEntries(lexicalEntries) {
+    const value = JSON.stringify(lexicalEntries, null, "  ");
 
-      <textarea className={`${className} lexical-entries`}
-                ref={(domElement) => {
+    this.setValue(value);
+  }
 
-                  this.domElement = domElement;
+  parentContext() {
+    const getLexicalEntries = this.getLexicalEntries.bind(this),
+          setLexicalEntries = this.setLexicalEntries.bind(this);
 
-                }}
-      >
-        {children}
-      </textarea>
+    return ({
+      getLexicalEntries,
+      setLexicalEntries
+    });
+  }
 
-    );
+  static defaultProperties = {
+    className: "lexical-entries",
+    spellCheck: "false"
+  };
+
+  static fromProperties(Class, properties) {
+    if (properties === undefined) {
+      properties = Class; ///
+
+      Class = LexicalEntriesTextarea;
+    }
+
+    return Textarea.fromProperties(Class, properties);
   }
 }
 
@@ -35,16 +50,3 @@ export default withStyle(LexicalEntriesTextarea)`
   margin-bottom: 1rem;
 
 `;
-
-function getLexicalEntries() {
-  const value = this.getValue(),
-        lexicalEntries = JSON.parse(value);
-
-  return lexicalEntries;
-}
-
-function setLexicalEntries(lexicalEntries) {
-  const value = JSON.stringify(lexicalEntries, null, "  ");
-
-  this.setValue(value);
-}
