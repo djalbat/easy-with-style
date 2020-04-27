@@ -9,7 +9,7 @@
     "url": "https://github.com/djalbat/easy-with-style"
   },
   "dependencies": {
-    "easy": "^9.0.5",
+    "easy": "^9.0.6",
     "with-style": "^4.0.2"
   },
   "devDependencies": {

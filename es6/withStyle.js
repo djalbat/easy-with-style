@@ -12,7 +12,7 @@ function withStyle(ClassOrFunction) {
   return function() {
     const args = [...arguments];  ///
 
-    let { className } = ClassOrFunction;
+    let { className = null } = ClassOrFunction;
 
     const superStyle = retrieveStyle(className);
 
@@ -26,12 +26,18 @@ function withStyle(ClassOrFunction) {
       const Class = ClassOrFunction;  ///
 
       ClassOrFunction = class extends Class {
-        static fromProperties(properties) {
+        static fromProperties(_Class, properties) {
+          if (properties === undefined) {
+            properties = _Class; ///
+
+            _Class = ClassOrFunction;
+          }
+
           properties = appendClassNameToProperties(className, properties);
 
-          return Class.fromProperties(properties);
+          return Class.fromProperties(_Class, properties);
         }
-      };
+      }
     } else {
       const Function = ClassOrFunction; ///
 
