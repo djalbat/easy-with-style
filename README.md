@@ -34,8 +34,11 @@ renderStyles();
 body.prepend(
 
   <View />
+
 );
 ```
+
+You must call the `renderStyles()` function *after* importing the view but *before* rendering it. Doing so ensures that the styles generated as a result of executing the view code are inserted into the DOM before the view itself. Note that rendering the styles in this way is not done as part of the build process, you must explicitly call the `renderStyles()` function, ideally right before you attach the view to the body.
 
 ## Contact
 
