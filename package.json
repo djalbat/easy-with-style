@@ -4,13 +4,12 @@
   "version": "0.0.1",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/djalbat/easy-with-style",
-  "description": "Programmatic styles for Easy.",
   "repository": {
     "type": "git",
     "url": "https://github.com/djalbat/easy-with-style"
   },
   "dependencies": {
-    "easy": "^2.2.26",
+    "easy": "^9.0.5",
     "with-style": "^4.0.2"
   },
   "devDependencies": {
