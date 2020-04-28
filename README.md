@@ -44,7 +44,7 @@ You must call the `renderStyles()` function *after* importing the view but *befo
 
 ## Creating primitive element with style
 
-All of the standard HTML elements are supported. For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/with-style/blob/master/es6/tagNames.js) file. You can access these elements, which are functional elements under the hood, as follows:
+All of the standard HTML elements are supported. For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/with-style/blob/master/es6/tagNames.js) file. You can create these elements, which are functional elements under the hood, as follows:
 
 ```
 const Link = withStyle.a`
@@ -120,7 +120,7 @@ class Div extends Element {
       Class = Div;
     }
 
-    return Textarea.fromProperties(Div, properties);
+    return Element.fromProperties(Div, properties);
   }
 }
 
@@ -130,7 +130,102 @@ export default withStyle(Div)`
 
 `;
 ```
-The one caveat to be aware of is that the static `fromProperties()` factory method must be polymorphic as shown. This is because the anonymous class that the `withStyle()` returns will call the `fromProperties()` method and expects this signature.
+The one caveat to be aware of is that the static `fromProperties()` factory method must be polymorphic as shown. This is because the anonymous class that the `withStyle()` method returns calls the `fromProperties()` method and expects this signature.
+
+## Extending the styles of elements with style
+
+If all you want to do is to add further styles to an element, be it a primitive, functional or class element, simply wrap it in another `withStyle()` call:
+
+```
+const HeaderLink = withStyle(Link)`
+
+  ...
+
+`;
+```
+
+In this case the `Link` element will keep its own styles whilst the `HeaderLink` element will both inherit those styles and of course possess its own.
+
+## Elements with style and composition
+
+Composing elements with style obviously causes no problems in general, aside from one small caveat. If you set the `className` property of an element with style, then you will overwrite the class name that has been given to it automatically. In the case of all functional and class elements with style, however, it is easy to recover the class name and incorporate it into your own:
+
+```
+const NavigationButton = (properties) => {
+  const { className } = Button,
+        { children } = properties;
+
+  return (
+
+    <Button className={`${className} navigation`}>
+      {children}
+    </Button>
+
+  );
+}
+```
+This situation occasionally arises when using placeholder class names, see below.
+
+## Class elements with style and class inheritance
+
+Extending your own class elements with style involves nothing more than remembering the correct signature for the static `fromProperties()` factory method, there is nothing more to do:
+
+
+```
+class MainDiv extends Div {
+  ...
+
+  static defaultProperties = {
+    className: "main"
+  };
+
+  static fromProperties(Class, properties) {
+    if (properties === undefined) {
+      properties = Class; ///
+
+      Class = MainDiv;
+    }
+
+    return Div.fromProperties(MainDiv, properties);
+  }
+}
+
+export default withStyle(MainDiv)`
+
+  ...
+
+`;
+```
+Note that the element has been given a class name by way of the static `defaultProperties` class field in the normal fashion. The automatically generated class name for the styles does not interfere with this process. Again this is an example of placeholder class names, see immediately below.
+
+## Placeholder class names
+
+Class names are randomly generated hashes of around eight characters, and as such are far from ideal when debugging. It is best to add your own placeholder class names, therefore. For functional components the following pattern is recommended:
+
+```
+const MainHeader = (properties) => {
+  const { className } = properties;
+
+  return (
+
+    <header className={`${className} main`}>
+
+      ...
+
+    </header>
+
+  );
+};
+
+export default withStyle(MainHeader)`
+
+  ...
+
+`;
+```
+For class components there is nothing to do, just add your own placeholder class name by wa of the `className` property of the `defaultProperties` static class field, as above.
+
+Placeholder class names make the association of DOM elements in your browser's developer tools with their corresponding components far easier.
 
 ## Example
 
