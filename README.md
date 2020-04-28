@@ -42,6 +42,10 @@ body.prepend(
 
 You must call the `renderStyles()` function *after* importing the view but *before* rendering it. Doing so ensures that the styles generated as a result of executing the view code are inserted into the DOM before the view itself. Note that rendering the styles in this way is not done as part of the build process, you must explicitly call the `renderStyles()` function, ideally right before you attach the view to the body.
 
+## Example
+
+Not an example as such. It allows you to test out CSS against the built-in CSS lexer and parser. This is the first port of call should you suspect that your CSS is not being parsed correctly. Both the lexical entries and BNF that make up the CSS grammar can be altered on the fly. Pull requests are welcome for improvements to either.
+
 ## Creating primitive element with style
 
 All of the standard HTML elements are supported. For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/with-style/blob/master/es6/tagNames.js) file. You can create these elements, which are functional elements under the hood, as follows:
@@ -227,9 +231,54 @@ For class components there is nothing to do, just add your own placeholder class
 
 Placeholder class names make the association of DOM elements in your browser's developer tools with their corresponding components far easier.
 
-## Example
+## An example of functional classes
 
-Not an example as such. It allows you to test out CSS against the built-in CSS lexer and parser. This is the first port of call should you suspect that your CSS is not being parsed correctly. Both the lexical entries and BNF that make up the CSS grammar can be altered on the fly. Pull requests are welcome for improvements to either.
+Elements with style are great for working with styles that relate directly to a element's functionality as opposed to just its appearance.
+
+```
+class Div extends Element {
+  hide() {
+    this.addClass('hidden');
+  }
+
+  display() {
+    this.removeClass('hidden');
+  }
+
+  isHidden() {
+    const hidden = this.hasClass('hidden');
+
+    return hidden;
+  }
+
+  isDisplayed() {
+    const hidden = this.isHidden(),
+          displayed = !hidden;
+
+    return displayed;
+  }
+
+  ...
+}
+
+export default withStyle(Div)`
+
+  .hidden {
+
+    display: none;
+
+   }
+
+`;
+```
+In the example above, for example, the element can be programmatically displayed and hidden.
+
+## Compiling from source
+
+Automation is thanks to [npm scripts](https://docs.npmjs.com/misc/scripts), have a look at the `package.json` file. The pertinent commands are:
+
+    npm run build-debug
+    npm run watch-debug
 
 ## Contact
 
