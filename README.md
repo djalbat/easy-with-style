@@ -46,7 +46,7 @@ You must call the `renderStyles()` function *after* importing the view but *befo
 
 Not an example as such. It allows you to test out CSS against the built-in CSS lexer and parser. This is the first port of call should you suspect that your CSS is not being parsed correctly. Both the lexical entries and BNF that make up the CSS grammar can be altered on the fly. Pull requests are welcome for improvements to either.
 
-## Creating primitive element with style
+## Creating primitive elements with style
 
 All of the standard HTML elements are supported. For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/with-style/blob/master/es6/tagNames.js) file. You can create these elements, which are functional elements under the hood, as follows:
 
@@ -97,17 +97,6 @@ Note that the `className` property is retrieved from the `properties` object and
 
 ## Creating class elements with style
 
-Adding style to supported elements couldn't be more straightforward:
-
-```
-import { Textarea } from "easy";
-
-export default withStyle(Textarea)`
-
-  ...
-
-`;
-```
 Creating your own elements by extending the `Element` or `InputElement` class, or any supported element class for that matter, is also relatively straightforward:
 ```
 import { Element } from "easy";
