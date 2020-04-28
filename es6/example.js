@@ -4,13 +4,7 @@ import withStyle from "./index";
 
 import { Body, React } from "easy";
 
-// import View from "./example/view";
-
-const Link = withStyle.a`
-
-  text-decoration: none;
-
-`;
+import View from "./example/view";
 
 Object.assign(window, {
   React
@@ -24,6 +18,6 @@ renderStyles();
 
 body.prepend(
 
-  <Link href="http://google.com">blah</Link>
+  <View />
 
 );
