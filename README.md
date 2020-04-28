@@ -2,6 +2,8 @@
 
 Programmatic styles for [Easy](https://github.com/djalbat/easy).
 
+To find out what variant of CSS is supported, which is essential to know, please read the [With Style](https://github.com/djalbat/with-style) readme file.
+
 ## Installation
 
 With [npm](https://www.npmjs.com/):
@@ -39,6 +41,57 @@ body.prepend(
 ```
 
 You must call the `renderStyles()` function *after* importing the view but *before* rendering it. Doing so ensures that the styles generated as a result of executing the view code are inserted into the DOM before the view itself. Note that rendering the styles in this way is not done as part of the build process, you must explicitly call the `renderStyles()` function, ideally right before you attach the view to the body.
+
+## Creating primitive element with style
+
+All of the standard HTML elements are supported. For a complete list of tag names, see the [`tagNames.js`](https://github.com/djalbat/with-style/blob/master/es6/tagNames.js) file. You can access these elements, which are functional elements under the hood, as follows:
+
+```
+const Link = withStyle.a`
+
+  color: ${white};
+  text-decoration: none;
+
+  @media (min-width: ${desktop}) {
+    color: ${black};
+  }
+
+`;
+```
+
+Now you are free to use the `Link` element in the usual way.
+
+Note that expression interpolation is supported. For example, here colour and breakpoint variables have been used.
+
+To learn more about template literals in general and expression interpolation in particular, see the relevant [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
+
+## Creating functional elements with style
+
+This can be done with the `withStyle()` function:
+
+```
+const Header = (properties) => {
+  const { className } = properties;
+
+  return (
+
+    <header className={className}>
+
+      ...
+
+    </header>
+
+  );
+};
+
+export default withStyle(Header)`
+
+  ...
+
+`;
+```
+
+Note that the `className` property is retrieved from the `properties` object and must be used as the value of the attribute of the same name on the outermost JSX element that the function returns.
 
 ## Example
 

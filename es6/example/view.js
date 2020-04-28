@@ -53,7 +53,7 @@ export default class View extends Element {
     return ([
 
       <Heading>
-        Reaction with Style example
+        Easy with Style example
       </Heading>,
       <ColumnsDiv>
         <SizeableDiv>
