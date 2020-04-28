@@ -233,7 +233,7 @@ Placeholder class names make the association of DOM elements in your browser's d
 
 ## An example of functional classes
 
-Elements with style are great for working with styles that relate directly to a element's functionality as opposed to just its appearance.
+Elements with style are great for working with styles relating to an element's functionality as opposed to just its appearance.
 
 ```
 class Div extends Element {
