@@ -59,9 +59,7 @@ const Link = withStyle.a`
 `;
 ```
 
-Now you are free to use the `Link` element in the usual way.
-
-Note that expression interpolation is supported. For example, here colour and breakpoint variables have been used.
+Now you are free to use the `Link` element in the usual way. Note that expression interpolation is supported. For example, here colour and breakpoint variables have been used.
 
 To learn more about template literals in general and expression interpolation in particular, see the relevant [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
@@ -92,6 +90,47 @@ export default withStyle(Header)`
 ```
 
 Note that the `className` property is retrieved from the `properties` object and must be used as the value of the attribute of the same name on the outermost JSX element that the function returns.
+
+## Creating class elements with style
+
+Adding style to supported elements couldn't be more straightforward:
+
+```
+import { Textarea } from "easy";
+
+export default withStyle(Textarea)`
+
+  ...
+
+`;
+```
+Creating your own elements by extending the `Element` or `InputElement` class, or any supported element class for that matter, is also relatively straightforward:
+```
+import { Element } from "easy";
+
+class Div extends Element {
+  static tagName = "div";
+
+  ...
+
+  static fromProperties(Class, properties) {
+    if (properties === undefined) {
+      properties = Class; ///
+
+      Class = Div;
+    }
+
+    return Textarea.fromProperties(Div, properties);
+  }
+}
+
+export default withStyle(Div)`
+
+  ...
+
+`;
+```
+The one caveat to be aware of is that the static `fromProperties()` factory method must be polymorphic as shown. This is because the anonymous class that the `withStyle()` returns will call the `fromProperties()` method and expects this signature.
 
 ## Example
 
