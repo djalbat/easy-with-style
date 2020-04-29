@@ -32,16 +32,6 @@ class LexicalEntriesTextarea extends Textarea {
     className: "lexical-entries",
     spellCheck: "false"
   };
-
-  static fromProperties(Class, properties) {
-    if (properties === undefined) {
-      properties = Class; ///
-
-      Class = LexicalEntriesTextarea;
-    }
-
-    return Textarea.fromProperties(Class, properties);
-  }
 }
 
 export default withStyle(LexicalEntriesTextarea)`

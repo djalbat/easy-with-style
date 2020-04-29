@@ -30,16 +30,6 @@ class ContentTextarea extends Textarea {
     className: "content",
     spellCheck: "false"
   };
-
-  static fromProperties(Class, properties) {
-    if (properties === undefined) {
-      properties = Class; ///
-
-      Class = ContentTextarea;
-    }
-
-    return Textarea.fromProperties(Class, properties);
-  }
 }
 
 export default ContentTextarea;

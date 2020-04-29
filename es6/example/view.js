@@ -82,7 +82,7 @@ export default class View extends Element {
     ]);
   }
 
-  initialise() {
+  initialise(properties) {
     this.assignContext();
 
     const { entries } = CSSLexer,
@@ -99,10 +99,10 @@ export default class View extends Element {
 
   static tagName = "div";
 
-  static fromProperties(properties) {
-    const view = Element.fromProperties(View, properties);
+  static fromClass(Class, properties) {
+    const view = Element.fromClass(Class, properties);
 
-    view.initialise();
+    view.initialise(properties);
 
     return view;
   }

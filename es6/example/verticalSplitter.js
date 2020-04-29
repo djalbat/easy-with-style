@@ -75,7 +75,7 @@ class VerticalSplitter extends Element {
     return dragging;
   }
 
-  initialise() {
+  initialise(properties) {
     const mouseUpHandler = this.mouseUpHandler.bind(this),
           mouseMoveHandler = this.mouseMoveHandler.bind(this),
           mouseDownHandler = this.mouseDownHandler.bind(this),
@@ -97,16 +97,10 @@ class VerticalSplitter extends Element {
     className: "vertical-splitter"
   };
 
-  static fromProperties(Class, properties) {
-    if (properties === undefined) {
-      properties = Class; ///
+  static fromClass(Class, properties) {
+    const verticalSplitter = Element.fromClass(Class, properties);
 
-      Class = LexicalEntriesTextarea;
-    }
-
-    const verticalSplitter = Element.fromProperties(Class, properties);
-
-    verticalSplitter.initialise();
+    verticalSplitter.initialise(properties);
 
     return verticalSplitter;
   }

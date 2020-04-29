@@ -26,16 +26,10 @@ function withStyle(ClassOrFunction) {
       const Class = ClassOrFunction;  ///
 
       ClassOrFunction = class extends Class {
-        static fromProperties(_Class, properties) {
-          if (properties === undefined) {
-            properties = _Class; ///
-
-            _Class = ClassOrFunction;
-          }
-
+        static fromClass(_Class, properties) {
           properties = appendClassNameToProperties(className, properties);
 
-          return Class.fromProperties(_Class, properties);
+          return Class.fromClass(_Class, properties);
         }
       }
     } else {

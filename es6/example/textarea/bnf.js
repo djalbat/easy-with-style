@@ -30,16 +30,6 @@ class BNFTextarea extends Textarea {
     className: "bnf",
     spellCheck: "false"
   };
-
-  static fromProperties(Class, properties) {
-    if (properties === undefined) {
-      properties = Class; ///
-
-      Class = BNFTextarea;
-    }
-
-    return Textarea.fromProperties(Class, properties);
-  }
 }
 
 export default BNFTextarea;

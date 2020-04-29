@@ -39,16 +39,6 @@ class ParseTreeTextarea extends Textarea {
     className: "parse-tree",
     spellCheck: "false"
   };
-
-  static fromProperties(Class, properties) {
-    if (properties === undefined) {
-      properties = Class; ///
-
-      Class = ParseTreeTextarea;
-    }
-
-    return Textarea.fromProperties(Class, properties);
-  }
 }
 
 export default withStyle(ParseTreeTextarea)`
