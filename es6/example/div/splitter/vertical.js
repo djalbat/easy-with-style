@@ -1,12 +1,12 @@
 "use strict";
 
-import withStyle from "../index";  ///
+import withStyle from "../../../index";  ///
 
 import { window, Element } from "easy";
 
-import cursor from "./cursor";
+import cursor from "../../cursor";
 
-class VerticalSplitter extends Element {
+class VerticalSplitterDiv extends Element {
   mouseUpHandler() {
     const dragging = this.isDragging();
 
@@ -106,7 +106,7 @@ class VerticalSplitter extends Element {
   }
 }
 
-export default withStyle(VerticalSplitter)`
+export default withStyle(VerticalSplitterDiv)`
 
   width: 0.5rem;
   flex-shrink: 0;

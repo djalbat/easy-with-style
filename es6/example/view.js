@@ -11,8 +11,8 @@ import SubHeading from "./subHeading";
 import SizeableDiv from "./div/sizeable";
 import BNFTextarea from "./textarea/bnf";
 import ContentTextarea from "./textarea/content";
-import VerticalSplitter from "./verticalSplitter";
 import ParseTreeTextarea from "./textarea/parseTree";
+import VerticalSplitterDiv from "./div/splitter/vertical";
 import LexicalEntriesTextarea from "./textarea/lexicalEntries";
 
 export default class View extends Element {
@@ -66,7 +66,7 @@ export default class View extends Element {
           </SubHeading>
           <BNFTextarea onKeyUp={keyUpHandler} />
         </SizeableDiv>
-        <VerticalSplitter />
+        <VerticalSplitterDiv />
         <ColumnDiv>
           <SubHeading>
             Parse tree

@@ -7,17 +7,13 @@ import { Textarea } from "easy";
 export default withStyle(Textarea)`
 
   width: 100%;
-  font-size: 1rem;
-  padding: 0.25rem;
-  font-family: monospace;
   border: 1px solid darkgray;
   height: 16rem;
   resize: vertical;
-  white-space: pre;
+  padding: 0.25rem;
+  font-size: 1rem;
   margin-top: 0.5rem;
-  
-  .error {
-    border-color: red;
-  }
+  font-family: monospace;
+  white-space: pre;
 
 `;
