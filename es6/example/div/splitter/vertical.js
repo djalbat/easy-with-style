@@ -108,7 +108,7 @@ class VerticalSplitterDiv extends Element {
 
 export default withStyle(VerticalSplitterDiv)`
 
-  width: 0.5rem;
+  width: 1rem;
   flex-shrink: 0;
   background-color: lightgrey;
 
