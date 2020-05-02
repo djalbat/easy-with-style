@@ -110,6 +110,7 @@ export default withStyle(VerticalSplitterDiv)`
 
   width: 1rem;
   flex-shrink: 0;
+  
   background-color: lightgrey;
 
 `;
