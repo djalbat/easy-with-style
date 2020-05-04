@@ -1,10 +1,8 @@
 "use strict";
 
-import withStyle from "../../index";  ///
-
 import Textarea from "../textarea";
 
-class LexicalEntriesTextarea extends Textarea {
+export default class LexicalEntriesTextarea extends Textarea {
   getLexicalEntries() {
     const value = this.getValue(),
           lexicalEntries = JSON.parse(value);
@@ -33,10 +31,3 @@ class LexicalEntriesTextarea extends Textarea {
     spellCheck: "false"
   };
 }
-
-export default withStyle(LexicalEntriesTextarea)`
-
-  overflow-wrap: normal;
-  margin-bottom: 1rem;
-
-`;

@@ -1,10 +1,8 @@
 "use strict";
 
-import withStyle from "../../index";  ///
-
 import Textarea from "../textarea";
 
-class ParseTreeTextarea extends Textarea {
+export default class ParseTreeTextarea extends Textarea {
   setParseTree(parseTree) {
     if (parseTree !== null) {
       parseTree.shiftLine();  //
@@ -40,9 +38,3 @@ class ParseTreeTextarea extends Textarea {
     spellCheck: "false"
   };
 }
-
-export default withStyle(ParseTreeTextarea)`
-
-  margin-bottom: 1rem;
-
-`;
