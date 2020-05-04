@@ -69,13 +69,13 @@ export default class View extends Element {
         <VerticalSplitterDiv />
         <ColumnDiv>
           <SubHeading>
-            Parse tree
-          </SubHeading>
-          <ParseTreeTextarea />
-          <SubHeading>
             Content
           </SubHeading>
           <ContentTextarea onKeyUp={keyUpHandler} />
+          <SubHeading>
+            Parse tree
+          </SubHeading>
+          <ParseTreeTextarea />
         </ColumnDiv>
       </ColumnsDiv>
 
