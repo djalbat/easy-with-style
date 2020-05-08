@@ -31,7 +31,11 @@ function withStyle(ClassOrFunction) {
 
           return Class.fromClass(_Class, properties, ...remainingArguments);
         }
-      }
+      };
+
+      Object.assign(Class, {
+        className
+      });
     } else {
       const Function = ClassOrFunction; ///
 
@@ -40,11 +44,11 @@ function withStyle(ClassOrFunction) {
 
         return Function(properties);
       };
-    }
 
-    Object.assign(ClassOrFunction, {
-      className
-    });
+      Object.assign(Function, {
+        className
+      });
+    }
 
     return ClassOrFunction;
   };
