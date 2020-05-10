@@ -22,6 +22,10 @@ function withStyle(ClassOrFunction) {
 
     const ClassOrFunctionClass = isClass(ClassOrFunction);
 
+    Object.assign(ClassOrFunction, {
+      className
+    });
+
     if (ClassOrFunctionClass) {
       const Class = ClassOrFunction;  ///
 
@@ -33,9 +37,6 @@ function withStyle(ClassOrFunction) {
         }
       };
 
-      Object.assign(Class, {
-        className
-      });
     } else {
       const Function = ClassOrFunction; ///
 
@@ -44,10 +45,6 @@ function withStyle(ClassOrFunction) {
 
         return Function(properties);
       };
-
-      Object.assign(Function, {
-        className
-      });
     }
 
     return ClassOrFunction;
