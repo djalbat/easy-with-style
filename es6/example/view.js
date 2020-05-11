@@ -5,6 +5,7 @@ import { Element } from "easy";
 import { CSSLexer, CSSParser } from "with-style";
 
 import Heading from "./heading";
+import RowsDiv from "./div/rows";
 import ColumnDiv from "./div/column";
 import ColumnsDiv from "./div/columns";
 import SubHeading from "./subHeading";
@@ -68,14 +69,16 @@ export default class View extends Element {
         </SizeableDiv>
         <VerticalSplitterDiv />
         <ColumnDiv>
-          <SubHeading>
-            Content
-          </SubHeading>
-          <ContentTextarea onKeyUp={keyUpHandler} />
-          <SubHeading>
-            Parse tree
-          </SubHeading>
-          <ParseTreeTextarea />
+          <RowsDiv>
+            <SubHeading>
+              Content
+            </SubHeading>
+            <ContentTextarea onKeyUp={keyUpHandler} />
+            <SubHeading>
+              Parse tree
+            </SubHeading>
+            <ParseTreeTextarea />
+          </RowsDiv>
         </ColumnDiv>
       </ColumnsDiv>
 
