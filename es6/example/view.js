@@ -58,14 +58,16 @@ export default class View extends Element {
       </Heading>,
       <ColumnsDiv>
         <SizeableDiv>
-          <SubHeading>
-            Lexical entries
-          </SubHeading>
-          <LexicalEntriesTextarea onKeyUp={keyUpHandler} />
-          <SubHeading>
-            BNF
-          </SubHeading>
-          <BNFTextarea onKeyUp={keyUpHandler} />
+          <RowsDiv>
+            <SubHeading>
+              Lexical entries
+            </SubHeading>
+            <LexicalEntriesTextarea onKeyUp={keyUpHandler} />
+            <SubHeading>
+              BNF
+            </SubHeading>
+            <BNFTextarea onKeyUp={keyUpHandler} />
+          </RowsDiv>
         </SizeableDiv>
         <VerticalSplitterDiv />
         <ColumnDiv>
