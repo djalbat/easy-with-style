@@ -5,7 +5,7 @@ import Textarea from "../textarea";
 class ContentTextarea extends Textarea {
   getContent() {
     const value = this.getValue(),
-        content = value;  ///
+          content = value;  ///
 
     return content;
   }

@@ -1,6 +1,6 @@
 "use strict";
 
-import withStyle from "./index";
+import withStyle from "./index";  ///
 
 import { Body, React } from "easy";
 

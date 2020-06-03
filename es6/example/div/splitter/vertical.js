@@ -75,7 +75,7 @@ class VerticalSplitterDiv extends Element {
     return dragging;
   }
 
-  initialise(properties) {
+  initialise() {
     const mouseUpHandler = this.mouseUpHandler.bind(this),
           mouseMoveHandler = this.mouseMoveHandler.bind(this),
           mouseDownHandler = this.mouseDownHandler.bind(this),
@@ -100,7 +100,7 @@ class VerticalSplitterDiv extends Element {
   static fromClass(Class, properties) {
     const verticalSplitter = Element.fromClass(Class, properties);
 
-    verticalSplitter.initialise(properties);
+    verticalSplitter.initialise();
 
     return verticalSplitter;
   }

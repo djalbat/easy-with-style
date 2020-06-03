@@ -48,7 +48,7 @@ export default class View extends Element {
     }
   }
 
-  childElements(properties) {
+  childElements() {
     const keyUpHandler = this.keyUpHandler.bind(this);
 
     return ([
@@ -87,7 +87,7 @@ export default class View extends Element {
     ]);
   }
 
-  initialise(properties) {
+  initialise() {
     this.assignContext();
 
     const { entries } = CSSLexer,
@@ -107,7 +107,7 @@ export default class View extends Element {
   static fromClass(Class, properties) {
     const view = Element.fromClass(Class, properties);
 
-    view.initialise(properties);
+    view.initialise();
 
     return view;
   }
