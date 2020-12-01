@@ -1,9 +1,10 @@
 {
   "name": "easy-with-style",
   "author": "James Smith",
-  "version": "3.0.21",
+  "version": "3.0.22",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/djalbat/easy-with-style",
+  "description": "Programmatic styles for Easy.",
   "repository": {
     "type": "git",
     "url": "https://github.com/djalbat/easy-with-style"
