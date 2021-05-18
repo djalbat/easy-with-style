@@ -7,7 +7,7 @@ import { window, Element } from "easy";
 import cursor from "../../cursor";
 
 class VerticalSplitterDiv extends Element {
-  mouseUpHandler() {
+  mouseUpHandler(event, element) {
     const dragging = this.isDragging();
 
     if (dragging) {
@@ -53,11 +53,11 @@ class VerticalSplitterDiv extends Element {
     cursor.columnResize();
   }
 
-  mouseOverHandler() {
+  mouseOverHandler(event, element) {
     cursor.columnResize();
   }
 
-  mouseOutHandler() {
+  mouseOutHandler(event, element) {
     cursor.reset();
   }
 
@@ -75,20 +75,24 @@ class VerticalSplitterDiv extends Element {
     return dragging;
   }
 
-  initialise() {
-    const mouseUpHandler = this.mouseUpHandler.bind(this),
-          mouseMoveHandler = this.mouseMoveHandler.bind(this),
-          mouseDownHandler = this.mouseDownHandler.bind(this),
-          mouseOverHandler = this.mouseOverHandler.bind(this),
-          mouseOutHandler = this.mouseOutHandler.bind(this);
+  didMount() {
+    this.onMouseDown(this.mouseDownHandler, this);
+    this.onMouseOver(this.mouseOverHandler, this);
+    this.onMouseOut(this.mouseOutHandler, this);
 
-    this.onMouseDown(mouseDownHandler);
-    this.onMouseOver(mouseOverHandler);
-    this.onMouseOut(mouseOutHandler);
+    window.onMouseUp(this.mouseUpHandler, this);
 
-    window.onMouseUp(mouseUpHandler);
+    window.onMouseMove(this.mouseMoveHandler, this);
+  }
 
-    window.onMouseMove(mouseMoveHandler);
+  willUnmount() {
+    this.offMouseDown(this.mouseDownHandler, this);
+    this.offMouseOver(this.mouseOverHandler, this);
+    this.offMouseOut(this.mouseOutHandler, this);
+
+    window.offMouseUp(this.mouseUpHandler, this);
+
+    window.offMouseMove(this.mouseMoveHandler, this);
   }
 
   static tagName = "div";
@@ -96,14 +100,6 @@ class VerticalSplitterDiv extends Element {
   static defaultProperties = {
     className: "vertical-splitter"
   };
-
-  static fromClass(Class, properties) {
-    const verticalSplitter = Element.fromClass(Class, properties);
-
-    verticalSplitter.initialise();
-
-    return verticalSplitter;
-  }
 }
 
 export default withStyle(VerticalSplitterDiv)`

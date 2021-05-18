@@ -36,7 +36,7 @@ export default class View extends Element {
     return parseTree;
   }
 
-  keyUpHandler() {
+  keyUpHandler(event, element) {
     try {
       const parseTree = this.getParseTree();
 
@@ -46,6 +46,14 @@ export default class View extends Element {
 
       this.clearParseTree();
     }
+  }
+
+  didMount() {
+    this.keyUpHandler();
+  }
+
+  willUnmount() {
+    ///
   }
 
   childElements() {
@@ -98,17 +106,7 @@ export default class View extends Element {
     this.setBNF(bnf);
     this.setContent(content);
     this.setLexicalEntries(lexicalEntries);
-
-    this.keyUpHandler();
   }
 
   static tagName = "div";
-
-  static fromClass(Class, properties) {
-    const view = Element.fromClass(Class, properties);
-
-    view.initialise();
-
-    return view;
-  }
 }
