@@ -77,7 +77,7 @@ export default class View extends Element {
             <BNFTextarea onKeyUp={keyUpHandler} />
           </RowsDiv>
         </SizeableDiv>
-        <VerticalSplitterDiv />
+        <VerticalSplitterDiv/>
         <ColumnDiv>
           <RowsDiv>
             <SubHeading>
@@ -87,7 +87,7 @@ export default class View extends Element {
             <SubHeading>
               Parse tree
             </SubHeading>
-            <ParseTreeTextarea />
+            <ParseTreeTextarea/>
           </RowsDiv>
         </ColumnDiv>
       </ColumnsDiv>

@@ -2,6 +2,8 @@
 
 import Textarea from "../textarea";
 
+import { DOUBLE_SPACE } from "../constants";
+
 export default class LexicalEntriesTextarea extends Textarea {
   getLexicalEntries() {
     const value = this.getValue(),
@@ -11,7 +13,7 @@ export default class LexicalEntriesTextarea extends Textarea {
   }
 
   setLexicalEntries(lexicalEntries) {
-    const value = JSON.stringify(lexicalEntries, null, "  ");
+    const value = JSON.stringify(lexicalEntries, null, DOUBLE_SPACE);
 
     this.setValue(value);
   }

@@ -1,5 +1,7 @@
 "use strict";
 
+import { AUTO, COL_RESIZE, ROW_RESIZE } from "./constants";
+
 let previousCursor;  ///
 
 const bodyDOMElement = document.querySelector("body");
@@ -7,20 +9,20 @@ const bodyDOMElement = document.querySelector("body");
 function columnResize() {
   const currentCursor = getCurrentCursor();
 
-  if (currentCursor !== "col-resize") {
+  if (currentCursor !== COL_RESIZE) {
     previousCursor = currentCursor;
 
-    setCursor("col-resize");
+    setCursor(COL_RESIZE);
   }
 }
 
 function rowResize() {
   const currentCursor = getCurrentCursor();
 
-  if (currentCursor !== "row-resize") {
+  if (currentCursor !== ROW_RESIZE) {
     previousCursor = currentCursor;
 
-    setCursor("row-resize");
+    setCursor(ROW_RESIZE);
   }
 }
 
@@ -39,7 +41,7 @@ function setCursor(cursor) {
 }
 
 function getCurrentCursor() {
-  const currentCursor = bodyDOMElement.style.cursor;  ///
+  const currentCursor = bodyDOMElement.style.cursor || AUTO;
 
-  return currentCursor || "auto"; ///
+  return currentCursor;
 }

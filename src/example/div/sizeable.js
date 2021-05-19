@@ -15,10 +15,9 @@ const SizeableDiv = (properties) => {
 };
 
 export default withStyle(SizeableDiv)`
-
-  display: flex;
   
   width: 48rem;
+  display: flex;
   min-width: 24rem;
   padding-left: 1rem;
   padding-right: 1rem;
