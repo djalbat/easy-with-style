@@ -1,14 +1,12 @@
 "use strict";
 
+import "./example/preamble";
+
 import withStyle from "./index";  ///
 
-import { Body, React } from "easy";
+import { Body } from "easy";
 
 import View from "./example/view";
-
-Object.assign(window, {
-  React
-});
 
 const { renderStyles } = withStyle;
 
