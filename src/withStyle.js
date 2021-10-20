@@ -4,6 +4,7 @@ import { React } from "easy";
 import { tagNames, stylesUtilities, classNameUtilities } from "with-style";
 
 import { isClass } from "./utilities/class";
+import { CLASS_NAME } from "./constants";
 
 const { generateClassName } = classNameUtilities,
       { renderStyle, renderStyles, generateStyle, retrieveStyle } = stylesUtilities;
@@ -82,7 +83,7 @@ tagNames.forEach((tagName) => {
 });
 
 function appendClassNameToProperties(className, properties) {
-  properties = properties.hasOwnProperty("className") ? properties : {...properties, className}; ///
+  properties = properties.hasOwnProperty(CLASS_NAME) ? properties : { ...properties, className }; ///
 
   return properties;
 }
