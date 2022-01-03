@@ -61,9 +61,6 @@ export default class View extends Element {
 
     return ([
 
-      <Heading>
-        Easy with Style example
-      </Heading>,
       <ColumnsDiv>
         <SizeableDiv>
           <RowsDiv>
