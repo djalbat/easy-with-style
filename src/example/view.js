@@ -1,10 +1,11 @@
 "use strict";
 
+import withStyle from "../index"; ///
+
 import { Element } from "easy";
 
 import { CSSLexer, CSSParser } from "with-style";
 
-import Heading from "./heading";
 import RowsDiv from "./div/rows";
 import ColumnDiv from "./div/column";
 import ColumnsDiv from "./div/columns";
@@ -16,7 +17,7 @@ import ParseTreeTextarea from "./textarea/parseTree";
 import VerticalSplitterDiv from "./div/splitter/vertical";
 import LexicalEntriesTextarea from "./textarea/lexicalEntries";
 
-export default class View extends Element {
+class View extends Element {
   getParseTree() {
     let parseTree = null;
 
@@ -107,3 +108,9 @@ export default class View extends Element {
 
   static tagName = "div";
 }
+
+export default withStyle(View)`
+
+  padding: 1rem;
+  
+`;
