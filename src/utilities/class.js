@@ -5,17 +5,7 @@ import { Element } from "easy";
 export function isClass(argument) { return isSubclassOf(argument, Element); }  ///
 
 function isSubclassOf(argument, Class) {
-  let subclass = false;
+  const subclassOf = (argument.prototype instanceof Class);
 
-  if (argument.name === Class.name) {   ///
-    subclass = true;
-  } else {
-    argument = Object.getPrototypeOf(argument); ///
-
-    if (argument !== null) {
-      subclass = isSubclassOf(argument, Class);
-    }
-  }
-
-  return subclass;
+  return subclassOf;
 }
