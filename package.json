@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "easy": "^14.1.3",
-    "with-style": "^5.0.136"
+    "with-style": "^5.0.137"
   },
   "devDependencies": {
     "@swc/core": "^1.2.50",
