@@ -1,7 +1,7 @@
 {
   "name": "easy-with-style",
   "author": "James Smith",
-  "version": "3.0.266",
+  "version": "3.0.268",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/djalbat/easy-with-style",
   "description": "Programmatic styles for Easy.",
@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "easy": "^15.1.1",
-    "with-style": "^5.0.163"
+    "occam-dom": "^3.1.91",
+    "with-style": "^5.0.164"
   },
   "devDependencies": {
     "@swc/core": "^1.2.50",
