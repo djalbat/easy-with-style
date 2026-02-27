@@ -1,7 +1,7 @@
 {
   "name": "easy-with-style",
   "author": "James Smith",
-  "version": "3.0.542",
+  "version": "3.0.543",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/djalbat/easy-with-style",
   "description": "Programmatic styles for Easy.",
@@ -17,7 +17,7 @@
     "@swc/core": "1.13.20",
     "esbuild": "0.11.14",
     "express": "^4.17.1",
-    "lively-cli": "^2.0.77",
+    "lively-cli": "^2.0.96",
     "watchful-cli": "^1.7.84"
   },
   "scripts": {
