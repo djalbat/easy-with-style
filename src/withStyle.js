@@ -1,9 +1,8 @@
 "use strict";
 
-import { React } from "easy";
+import { React, Element } from "easy";
 import { tagNames, stylesUtilities, classNameUtilities } from "with-style";
 
-import { isClass } from "./utilities/class";
 import { CLASS_NAME } from "./constants";
 
 const { generateClassName } = classNameUtilities,
@@ -21,16 +20,16 @@ function withStyle(ClassOrFunction) {
 
     generateStyle(args, className, superStyle);
 
-    const ClassOrFunctionClass = isClass(ClassOrFunction);
+    const ClassOrFunctionElementClass = Element.isPrototypeOf(ClassOrFunction);
 
-    if (ClassOrFunctionClass) {
-      const Class = ClassOrFunction;  ///
+    if (ClassOrFunctionElementClass) {
+      const ElementClass = ClassOrFunction;  ///
 
-      ClassOrFunction = class extends Class {
-        static fromClass(_Class, properties, ...remainingArguments) {
+      ClassOrFunction = class extends ElementClass {
+        static fromClass(Class, properties, ...remainingArguments) {
           properties = appendClassNameToProperties(className, properties);
 
-          return Class.fromClass(_Class, properties, ...remainingArguments);
+          return ElementClass.fromClass(Class, properties, ...remainingArguments);
         }
       };
 
